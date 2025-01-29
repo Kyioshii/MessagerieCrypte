@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 400px;">
+        <h2 class="text-center mb-4">Créer un compte</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Nom d'utilisateur</label>
+                {{ form.username|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+                <label for="password1" class="form-label">Mot de passe</label>
+                {{ form.password1|add_class:"form-control" }}
+            </div>
+            <div class="mb-3">
+                <label for="password2" class="form-label">Confirmation du mot de passe</label>
+                {{ form.password2|add_class:"form-control" }}
+            </div>
+            <button type="submit" class="btn btn-success w-100">S'inscrire</button>
+        </form>
+        <p class="text-center mt-3">
+            Déjà inscrit ? <a href="{% url 'accounts:login' %}">Se connecter</a>
+        </p>
+    </div>
+</div>
+{% load static %}
+    <script src="{% static 'accounts/js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

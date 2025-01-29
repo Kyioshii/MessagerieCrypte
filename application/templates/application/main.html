@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    {% load static %}
+     <link rel="stylesheet" href="{% static 'application/css/bootstrap.min.css' %}">
+    <style>
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .search-bar {
+                margin: 20px auto;
+                width: 80%;
+            }
+            .user-list {
+                margin-top: 20px;
+            }
+            .user-item {
+                padding: 10px;
+                border-bottom: 1px solid #444444;
+            }
+            .user-item {
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #dddddd;
+                border-radius: 15px;
+                background-color: #f9f9f9;
+
+            }
+
+            .user-item:hover {
+                background-color: #e6e6e6;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            .a{
+                text-decoration: none;
+                color: #000000;
+
+            }
+            .link{
+                margin-top: 5px;
+            }
+            .x{
+                border-color: grey;
+                background-color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-end">
+            <p class="link"><a class="x btn btn-primary link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="{% url 'accounts:logout' %}">Deconnexion</a></p>
+        </div>
+        <h1 class="text-center">Discussions</h1>
+        <!-- Barre de recherche -->
+        <form method="get" class="search-bar">
+            <input type="text" name="q" class="form-control" placeholder="Rechercher un utilisateur..." value="{{ request.GET.q }}">
+        </form>
+
+        <!-- Liste des utilisateurs -->
+        <div class="user-list">
+            {% for user in users %}
+                <a href="{% url 'application:chat' user.id %}" class="a">
+                    <div class="user-item">
+                        <strong>{{ user.username }} {{ user.first_name }} {{ user.last_name }}</strong>
+                    </div>
+                </a>
+            {% empty %}
+                <p class="text-center">Aucun utilisateur trouvé.</p>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{% static 'application/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
